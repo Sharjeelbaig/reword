@@ -1,6 +1,7 @@
-export default function rephrase({
-  input,
-  classification = [
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = rephrase;
+function rephrase({ input, classification = [
     ["hello", "hi", "hey", "howdy", "greetings"],
     ["goodbye", "bye", "see you", "farewell", "later"],
     ["yes", "yeah", "yup", "sure", "ok", "okay"],
@@ -26,31 +27,21 @@ export default function rephrase({
     ["rich", "wealthy", "affluent", "prosperous", "well-off"],
     ["poor", "needy", "destitute", "impoverished", "indigent"],
     ["happy", "joyful", "cheerful", "content", "glad"],
-  ],
-}: {
-  input: string;
-  classification?: string[][];
-}): string {
-  const words = input.match(/\b\w+\b|[^\w\s]/g) || [];
-
-  const reworded = words.map((word) => {
-    const lowerWord = word.toLowerCase();
-    const index = classification.findIndex((group) => group.includes(lowerWord));
-    if (index !== -1) {
-      const randomWord =
-        classification[index][
-          Math.floor(Math.random() * classification[index].length)
-        ];
-      return word[0] === word[0].toUpperCase()
-        ? randomWord.charAt(0).toUpperCase() + randomWord.slice(1)
-        : randomWord;
-    }
-    return word;
-  });
-
-  return reworded.join(" ");
+], }) {
+    const words = input.match(/\b\w+\b|[^\w\s]/g) || [];
+    const reworded = words.map((word) => {
+        const lowerWord = word.toLowerCase();
+        const index = classification.findIndex((group) => group.includes(lowerWord));
+        if (index !== -1) {
+            const randomWord = classification[index][Math.floor(Math.random() * classification[index].length)];
+            return word[0] === word[0].toUpperCase()
+                ? randomWord.charAt(0).toUpperCase() + randomWord.slice(1)
+                : randomWord;
+        }
+        return word;
+    });
+    return reworded.join(" ");
 }
-
 // console.log(
 //   rephrase({
 //     input:
